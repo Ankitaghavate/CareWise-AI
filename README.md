@@ -119,22 +119,6 @@ Open your browser and navigate to:
 ---
 
 ## 📂 Project Structure
-```text
-# 🚑 CareWise AI: Ambulance Tracking System
-> **Real-time emergency response management powered by AI-driven tracking.**
-
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/carewise-ai-ambulance-tracking?style=social)](https://github.com/yourusername/carewise-ai-ambulance-tracking)
-[![Project Status](https://img.shields.io/badge/Status-Completed-success.svg)](#-project-status)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
----
-
-## 📖 Introduction
-CareWise AI is a web-based platform designed to optimize emergency services. It features a multi-role interface for drivers, hospitals, and users to coordinate ambulance dispatching and tracking in real-time.
-
----
-
-## 📂 Project Structure
 Based on the current development environment:
 
 ```text
