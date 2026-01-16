@@ -120,10 +120,39 @@ Open your browser and navigate to:
 
 ## 📂 Project Structure
 ```text
-carewise-ai-ambulance-tracking/
-├── assets/           # CSS, JS, and Images
-├── config/           # Database connection files
-├── database/         # .sql import files
-├── screenshots/      # UI Previews
-├── index.php         # Main landing page
-└── README.md         # Documentation
+# 🚑 CareWise AI: Ambulance Tracking System
+> **Real-time emergency response management powered by AI-driven tracking.**
+
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/carewise-ai-ambulance-tracking?style=social)](https://github.com/yourusername/carewise-ai-ambulance-tracking)
+[![Project Status](https://img.shields.io/badge/Status-Completed-success.svg)](#-project-status)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
+
+## 📖 Introduction
+CareWise AI is a web-based platform designed to optimize emergency services. It features a multi-role interface for drivers, hospitals, and users to coordinate ambulance dispatching and tracking in real-time.
+
+---
+
+## 📂 Project Structure
+Based on the current development environment:
+
+```text
+CAREWISE-AI/
+├── images/               # Project image assets
+├── src/                  # Source files and logic
+├── ambtracker.html       # Ambulance tracking interface
+├── driver.html           # Driver portal
+├── hospital.html         # Hospital management dashboard
+├── index.html            # Main landing page
+├── login_db.php          # Database login logic
+├── login.html            # Login interface
+├── manage.html           # Admin/Management panel
+├── package-lock.json     # Node.js dependencies lock
+├── roles.html            # Role selection page
+├── script.js             # Main JavaScript logic
+├── sign_in.php           # User sign-in process
+├── sign_up.php           # User registration process
+├── signin_db.php         # Sign-in database connection
+├── user-map.html         # Live map for users
+└── user.html             # User profile/dashboard
