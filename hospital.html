@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard</title>
+    <link rel="stylesheet" href="src/css/hospital.css">
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKR3agIMLtauzDhz4fCu3heww0BV_81H4" async defer></script>
+  </head>
+<body>
+    <div class="dashboard-container">
+        <img src="images/Ambulance Tracker.png" alt="CareWise-AI Logo" style="width: 250px; height: auto; margin-bottom: 10px; margin-left: 30px;">
+    
+        <h1>Hospital Dashboard👩‍⚕️🩺</h1>        
+        <h2 style="font-family: 'Arial', sans-serif; font-size: 24px; color: #666; margin: 10px 0; text-align: center;">
+            Your personalized AI experience
+        </h2>      
+        <div class="action-buttons" style="display: flex; justify-content: center; margin-top: 20px;">
+            <button class="action-btn" id="manageDriversBtn" style="margin-right: 10px; padding: 10px 20px; font-size: 16px;">Manage Drivers</button>
+            <button class="action-btn" id="manageAmbulancesBtn" style="padding: 10px 20px; font-size: 16px;">Manage Ambulances</button>
+        </div>
+
+        <!-- Driver and Ambulance Status Section -->
+        <div class="status-container">
+            <!-- Driver Status Section -->
+            <div id="driverStatus" class="status-section active">
+                <h2>Driver Status</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Driver Name</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="driversTableBody">
+                        <!-- Dynamic Driver Rows Will Be Injected Here -->
+                    </tbody>
+                </table>
+
+                <!-- Nearby Hospital Facilities for Drivers -->
+                <div class="nearby-facilities">
+                    <h3>Nearby Hospital Facilities</h3>
+                    <ul>
+                        <li>Bed Availability: <span id="bedAvailabilityDriver">Loading...</span></li>
+                        <li>Oxygen Supply: <span id="oxygenSupplyDriver">Loading...</span></li>
+                        <li>Blood Units: <span id="bloodUnitsDriver">Loading...</span></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Details for Drivers -->
+                <div class="contact-details">
+                    <h3>Contact Details</h3>
+                    <p>Driver XYZ: (123) 456-7890</p>
+                    <p>Driver ABC: (098) 765-4321</p>
+                </div>
+            </div>
+
+            <!-- Ambulance Status Section -->
+            <div id="ambulanceStatus" class="status-section active">
+                <h2>Ambulance Status</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ambulance ID</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ambulancesTableBody">
+                        <!-- Dynamic Ambulance Rows Will Be Injected Here -->
+                    </tbody>
+                </table>
+
+                <!-- Nearby Hospital Facilities for Ambulances -->
+                <div class="nearby-facilities">
+                    <h3>Nearby Hospital Facilities</h3>
+                    <ul>
+                        <li>Bed Availability: <span id="bedAvailabilityAmbulance">Loading...</span></li>
+                        <li>Oxygen Supply: <span id="oxygenSupplyAmbulance">Loading...</span></li>
+                        <li>Blood Units: <span id="bloodUnitsAmbulance">Loading...</span></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Details for Ambulances -->
+                <div class="contact-details">
+                    <h3>Contact Details</h3>
+                    <p>Ambulance 1: (321) 654-0987</p>
+                    <p>Ambulance 2: (789) 012-3456</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        const manageDriversBtn = document.getElementById('manageDriversBtn');
+        const manageAmbulancesBtn = document.getElementById('manageAmbulancesBtn');
+        const driversTableBody = document.getElementById('driversTableBody');
+        const ambulancesTableBody = document.getElementById('ambulancesTableBody');
+
+        // Mock Data for Nearby Facilities (Replace with dynamic data if available)
+        document.getElementById('bedAvailabilityDriver').textContent = "20";
+        document.getElementById('oxygenSupplyDriver').textContent = "Sufficient";
+        document.getElementById('bloodUnitsDriver').textContent = "15";
+
+        document.getElementById('bedAvailabilityAmbulance').textContent = "15";
+        document.getElementById('oxygenSupplyAmbulance').textContent = "Limited";
+        document.getElementById('bloodUnitsAmbulance').textContent = "10";
+
+        // Function to Load Drivers from localStorage
+        function loadDrivers() {
+            const drivers = JSON.parse(localStorage.getItem('drivers')) || [];
+            driversTableBody.innerHTML = ''; // Clear existing rows
+
+            drivers.forEach((driver, index) => {
+                const tr = document.createElement('tr');
+
+                const nameTd = document.createElement('td');
+                nameTd.textContent = driver.name;
+                tr.appendChild(nameTd);
+
+                const statusTd = document.createElement('td');
+                const statusSpan = document.createElement('span');
+                statusSpan.classList.add('status', driver.status.toLowerCase());
+                statusSpan.textContent = driver.status;
+                statusTd.appendChild(statusSpan);
+                tr.appendChild(statusTd);
+
+                const actionTd = document.createElement('td');
+                const manageLink = document.createElement('a');
+                manageLink.href = `manage.html?type=driver&index=${index}`;
+                manageLink.classList.add('manage-link');
+                manageLink.textContent = 'Manage';
+                actionTd.appendChild(manageLink);
+                tr.appendChild(actionTd);
+
+                driversTableBody.appendChild(tr);
+            });
+        }
+
+        // Function to Load Ambulances from localStorage
+        function loadAmbulances() {
+            const ambulances = JSON.parse(localStorage.getItem('ambulances')) || [];
+            ambulancesTableBody.innerHTML = ''; // Clear existing rows
+
+            ambulances.forEach((ambulance, index) => {
+                const tr = document.createElement('tr');
+
+                const idTd = document.createElement('td');
+                idTd.textContent = ambulance.id;
+                tr.appendChild(idTd);
+
+                const locationTd = document.createElement('td');
+                locationTd.textContent = ambulance.location;
+                tr.appendChild(locationTd);
+
+                const actionTd = document.createElement('td');
+                const manageLink = document.createElement('a');
+                manageLink.href = `manage.html?type=ambulance&index=${index}`;
+                manageLink.classList.add('manage-ambulance');
+                manageLink.textContent = 'Manage';
+                actionTd.appendChild(manageLink);
+                tr.appendChild(actionTd);
+
+                ambulancesTableBody.appendChild(tr);
+            });
+        }
+
+        // Initial Load
+        loadDrivers();
+        loadAmbulances();
+
+        // Event Listeners for Manage Buttons
+        manageDriversBtn.addEventListener('click', () => {
+            window.location.href = 'http://localhost/CareWise-AI/manage.html'; // Update with your desired URL
+        });
+
+        manageAmbulancesBtn.addEventListener('click', () => {
+            window.location.href = 'http://localhost/CareWise-AI/manage.html'; // Update with your desired URL
+        });
+    </script>
+</body>
+</html>
